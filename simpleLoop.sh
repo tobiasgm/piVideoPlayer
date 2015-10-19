@@ -5,25 +5,23 @@ setterm -cursor off
 
 # blank terminal after 1 min
 setterm -blank 1
- 
 
 # set here the path to the directory containing your videos
-VIDEOPATH="/media/usb0" 
+VIDEOPATH="/media/usb0"
 
 # you can normally leave this alone
 SERVICE="omxplayer"
 
 while true; do
-    if ps ax | grep -v grep | grep $SERVICE > /dev/null
+    if ps ax | grep -v grep | grep $SERVICE  > /dev/null
     then
-	echo "running" # >> /dev/null
+	echo "running"  >> /dev/null
     else
-        for entry in $VIDEOPATH/*
-        do
-            clear
-            omxplayer $entry > /dev/null
+        for file in $VIDEOPATH/*; do
+	clear
+        omxplayer -r "${file}" > /dev/null
         done
-	
+
     fi
 done
 
